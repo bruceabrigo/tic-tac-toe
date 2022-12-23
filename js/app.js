@@ -1,6 +1,7 @@
 const marker = document.querySelectorAll('[board-boxes]')
 const boxes = document.getElementsByClassName('box')
 const checkPlayer = document.querySelector('.currentPlayer')
+const winnerModal = document.querySelector('.winner-modal')
 const box0 = document.getElementById('box-0')
 const box1 = document.getElementById('box-1')
 const box2 = document.getElementById('box-2')
@@ -10,93 +11,155 @@ const box5 = document.getElementById('box-5')
 const box6 = document.getElementById('box-6')
 const box7 = document.getElementById('box-7')
 const box8 = document.getElementById('box-8')
-const reset = document.getElementById('reset')
 
+// create a model to display when winner is true
+let modal = document.getElementById("showWinner");
 // should we declare a game1 variable
 //create a turn counter - if turn counter odd(player1) of turn counter even(player2)
-console.log(boxes)
-let currentPlayer = 'X' //player who marks X
-let game = false
-console.log(currentPlayer)
+let currentPlayer = 'X' 
+//player who marks X
 checkPlayer.innerText = 'the current player is ' + currentPlayer
+let count = 0;
+
+// const tie = () => {
+//   for (const box of boxes) {
+//     box.addEventListener('click', function onClick() {
+//       console.log('box clicked')
+//     })
+//   }
+// }
 
 marker.forEach(cell => { //verify's one click 
   cell.addEventListener('click', markBox, {once:true})
+
+  console.log()
 })
 
-function markBox(e) { //adds player1 marker ('x') to board
-  console.log('clicked') //logs the click
-  const draw = e.target //waits for event
-  draw.innerText = currentPlayer //creates event for x to print
+function markBox(e) { 
+  //adds player1 marker ('x') to board
+  count ++
+  console.log(count)
+  console.log('clicked') 
+  //logs the click
+  const draw = e.target 
+  //waits for event
+  draw.innerText = currentPlayer 
+  //creates event for x to print
   // checkWinnerFunction goes here once done
   if(currentPlayer == 'X') {
     currentPlayer = 'O' 
     checkPlayer.innerText = 'the current player is ' + currentPlayer
-    console.log(currentPlayer)
+
   } else {
     currentPlayer = 'X'
     checkPlayer.innerText = 'the current player is ' + currentPlayer
-    console.log(currentPlayer)
-  }
-  game = true
-}
-const checkWinner = () => {
-  box0.addEventListener('click', checkWinner)
-  box1.addEventListener('click', checkWinner)
-  box2.addEventListener('click', checkWinner)
-  box3.addEventListener('click', checkWinner)
-  box4.addEventListener('click', checkWinner)
-  box5.addEventListener('click', checkWinner)
-  box6.addEventListener('click', checkWinner)
-  box7.addEventListener('click', checkWinner)
-  box8.addEventListener('click', checkWinner)
+  } 
 
+  //------- Checks for Draw ------- 
+  if (count == 9) {
+    checkPlayer.innerText = 'WE HAVE A DRAW!'
+    winnerModal.innerText = 'DRAW!!'
+    modal.style.display = 'block'
+  }
+}
+
+const checkWinner = () => {
+    
   let winner;
   if(box0.innerHTML == 'X' && box1.innerHTML == 'X' && box2.innerHTML == 'X') {
-    checkPlayer.innerText = 'X WON!'
+    winner = 'X WON!'
+    checkPlayer.innerText = winner
+    winnerModal.innerText = winner
   } else if(box0.innerHTML == 'O' && box1.innerHTML == 'O' && box2.innerHTML == 'O'){
-    checkPlayer.innerText = 'O WON!'
+    winner = 'O WON!'
+    checkPlayer.innerText = winner
+    winnerModal.innerText = winner
   } if(box3.innerHTML == 'X' && box4.innerHTML == 'X' && box5.innerHTML == 'X') {
-    checkPlayer.innerText = 'X WON!'
+    winner = 'X WON!'
+    checkPlayer.innerText = winner
+    winnerModal.innerText = winner
   } else if(box3.innerHTML == 'O' && box4.innerHTML == 'O' && box5.innerHTML == 'O'){
-    checkPlayer.innerText = 'O WON!'
+    winner = 'O WON!'
+    checkPlayer.innerText = winner
+    winnerModal.innerText = winner
   } if(box6.innerHTML == 'X' && box7.innerHTML == 'X' && box8.innerHTML == 'X') {
-    checkPlayer.innerText = 'X WON!'
+    winner = 'X WON!'
+    checkPlayer.innerText = winner
+    winnerModal.innerText = winner
   } else if(box6.innerHTML == 'O' && box7.innerHTML == 'O' && box8.innerHTML == 'O'){
-    checkPlayer.innerText = 'O WON!'
+    winner = 'O WON!'
+    checkPlayer.innerText = winner
+    winnerModal.innerText = winner
   } if(box0.innerHTML == 'X' && box3.innerHTML == 'X' && box6.innerHTML == 'X') { //
-    checkPlayer.innerText = 'X WON!'
+    winner = 'X WON!'
+    checkPlayer.innerText = winner
+    winnerModal.innerText = winner
   } else if(box0.innerHTML == 'O' && box3.innerHTML == 'O' && box6.innerHTML == 'O'){
+    winner = 'O WON!'
+    checkPlayer.innerText = winner
+    winnerModal.innerText = winner
   } if(box1.innerHTML == 'X' && box4.innerHTML == 'X' && box7.innerHTML == 'X') { //
-    checkPlayer.innerText = 'X WON!'
+    winner = 'X WON!'
+    checkPlayer.innerText = winner
+    winnerModal.innerText = winner
   } else if(box1.innerHTML == 'O' && box4.innerHTML == 'O' && box7.innerHTML == 'O'){
-    checkPlayer.innerText = 'O WON!'
+    winner = 'O WON!'
+    checkPlayer.innerText = winner
+    winnerModal.innerText = winner
   } if(box2.innerHTML == 'X' && box5.innerHTML == 'X' && box8.innerHTML == 'X') { //---ROWS---
-    checkPlayer.innerText = 'X WON!'
+    winner = 'X WON!'
+    checkPlayer.innerText = winner
+    winnerModal.innerText = winner
   } else if(box2.innerHTML == 'O' && box5.innerHTML == 'O' && box8.innerHTML == 'O'){
-    checkPlayer.innerText = 'O WON!'
+    winner = 'O WON!'
+    checkPlayer.innerText = winner
+    winnerModal.innerText = winner
   } if(box0.innerHTML == 'X' && box3.innerHTML == 'X' && box6.innerHTML == 'X') { //---ROWS---
-    checkPlayer.innerText = 'X WON!'
+    winner = 'X WON!'
+    checkPlayer.innerText = winner
+    winnerModal.innerText = winner
   } else if(box0.innerHTML == 'O' && box3.innerHTML == 'O' && box6.innerHTML == 'O'){
-    checkPlayer.innerText = 'O WON!'
+    winner = 'O WON!'
+    checkPlayer.innerText = winner
+    winnerModal.innerText = winner
   } if(box0.innerHTML == 'X' && box4.innerHTML == 'X' && box8.innerHTML == 'X') { //---ROWS---
-    winner = 'cross 1 true x'
-    checkPlayer.innerText = 'X WON!'
+    winner = 'X WON!'
+    checkPlayer.innerText = winner
+    winnerModal.innerText = winner
   } else if(box0.innerHTML == 'O' && box4.innerHTML == 'O' && box8.innerHTML == 'O'){
-    winner = 'cross 1 true o'
-    checkPlayer.innerText = 'O WON!'
+    winner = 'O WON!'
+    checkPlayer.innerText = winner
+    winnerModal.innerText = winner
   } if(box2.innerHTML == 'X' && box4.innerHTML == 'X' && box6.innerHTML == 'X') { //---CROSS---
-    winner = 'cross 2 true x'
-    checkPlayer.innerText = 'X WON!'
+    winner = 'X WON!'
+    checkPlayer.innerText = winner
+    winnerModal.innerText = winner
   } else if(box2.innerHTML == 'O' && box4.innerHTML == 'O' && box6.innerHTML == 'O'){ //---CROSS---
-   winner = 'cross 2 true o'
-   checkPlayer.innerText = 'O WON!'
-} 
-//  } 
- console.log(winner)
+    winner = 'O WON!'
+    checkPlayer.innerText = winner  
+    // winner modal quits spans across full page and only allows game to restart.
+    winnerModal.innerText = winner 
+  } if (winner == 'X WON!' || winner == 'O WON!') {
+    modal.style.display = 'block'
+  }
+
 }
+
+const clearAll = () =>{
+  window.location.reload()
+  console.log('press me')
+}
+
 
 
 checkWinner()
-checkDraw()
-console.log(game)
+box0.addEventListener('click', checkWinner)
+box1.addEventListener('click', checkWinner)
+box2.addEventListener('click', checkWinner)
+box3.addEventListener('click', checkWinner)
+box4.addEventListener('click', checkWinner)
+box5.addEventListener('click', checkWinner)
+box6.addEventListener('click', checkWinner)
+box7.addEventListener('click', checkWinner)
+box8.addEventListener('click', checkWinner)
+
